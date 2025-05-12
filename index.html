@@ -6,11 +6,84 @@
   <title>Restaurant Inventory Management</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <!-- Custom CSS -->
   <style>
-    .nav-link {
-      cursor: pointer;
+    body {
+      background-color: #F5F5F5; /* Light cream background */
+      font-family: 'Poppins', sans-serif;
+      color: #333; /* Dark gray text */
     }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1, h2, h3 {
+      color: #4ECDC4; /* Soft teal for headings */
+      font-weight: 500;
+    }
+    /* Modern Tabs */
+    .nav-tabs {
+      border: none;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+    .nav-tabs .nav-link {
+      background-color: #E0E0E0; /* Light gray background for inactive tabs */
+      color: #333;
+      border: none;
+      border-radius: 25px;
+      padding: 12px 25px;
+      font-size: 16px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .nav-tabs .nav-link:hover {
+      background-color: #4ECDC4; /* Soft teal on hover */
+      color: #FFF;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+    .nav-tabs .nav-link.active {
+      background-color: #4ECDC4; /* Soft teal for active tab */
+      color: #FFF;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+    /* Tables */
+    .table {
+      background-color: #FFF;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .table thead {
+      background-color: #4ECDC4; /* Soft teal for table headers */
+      color: #FFF;
+    }
+    .table-striped tbody tr:nth-of-type(odd) {
+      background-color: #F9F9F9; /* Slightly lighter rows */
+    }
+    /* Buttons */
+    .btn-primary {
+      background-color: #4ECDC4; /* Soft teal buttons */
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background-color: #45B7AF;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+    /* Item Cards */
     .item-card {
       width: 120px;
       height: 120px;
@@ -19,15 +92,16 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      border: 1px solid #ddd;
-      border-radius: 8px;
+      border: none;
+      border-radius: 10px;
       cursor: pointer;
-      transition: transform 0.2s;
-      background-color: #f8f9fa;
+      transition: all 0.3s ease;
+      background-color: #FFF;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
     .item-card:hover {
       transform: scale(1.05);
-      background-color: #e9ecef;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     }
     .item-card img {
       width: 60px;
@@ -37,12 +111,50 @@
     .item-card span {
       font-size: 14px;
       text-align: center;
+      font-weight: 500;
     }
     #itemsGrid {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       margin-top: 20px;
+    }
+    /* Category-specific colors for item cards */
+    .item-card.Dairy {
+      background-color: #E6F0FA; /* Light blue for Dairy */
+    }
+    .item-card.Produce {
+      background-color: #E8F5E9; /* Light green for Produce */
+    }
+    .item-card.Meat {
+      background-color: #FFEBEE; /* Light red for Meat */
+    }
+    .item-card.Beverages {
+      background-color: #FFF3E0; /* Light orange for Beverages */
+    }
+    /* Alerts */
+    .alert-success {
+      background-color: #E8F5E9;
+      color: #2E7D32;
+    }
+    .alert-danger {
+      background-color: #FFEBEE;
+      color: #D32F2F;
+    }
+    /* Reorder Table Highlight */
+    #reorderTableBody tr {
+      background-color: #FFEBEE; /* Light coral for reorder items */
+    }
+    /* Modal */
+    .modal-content {
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    .modal-header {
+      background-color: #4ECDC4;
+      color: #FFF;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
     }
   </style>
 </head>
@@ -358,7 +470,7 @@
         categorySelect.appendChild(option);
       });
 
-      // Populate add inventory dropdown (unchanged)
+      // Populate add inventory dropdown
       addItemSelect.innerHTML = '<option value="">-- Select an Item --</option>';
       inventory.forEach(item => {
         const option = document.createElement("option");
@@ -381,7 +493,7 @@
 
       filteredItems.forEach(item => {
         const card = document.createElement("div");
-        card.className = "item-card";
+        card.className = `item-card ${item.category}`; // Add category class for styling
         card.onclick = () => openLogUsageModal(item.name);
         card.innerHTML = `
           <img src="https://via.placeholder.com/60?text=${item.name.charAt(0)}" alt="${item.name}">
