@@ -214,6 +214,7 @@
       const inventory = await fetchData("getInventory");
       const usageLog = await fetchData("getUsageLog");
       const receivedLog = await fetchData("getReceivedLog");
+      console.log("Inventory data in fetchAllData:", inventory); // Debug log
 
       updateInventoryTable(inventory);
       updateUsageLogTable(usageLog);
