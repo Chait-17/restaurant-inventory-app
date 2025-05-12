@@ -20,12 +20,9 @@
       margin: 0 auto;
       padding: 15px;
     }
-    h1, h2, h3 {
+    h2, h3 {
       color: #4ECDC4; /* Soft teal for headings */
       font-weight: 500;
-    }
-    h1 {
-      font-size: 1.5rem; /* Smaller heading on mobile */
     }
     /* Navigation Styles */
     .navbar {
@@ -192,8 +189,18 @@
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
     }
+    /* Tab Panes */
+    .tab-pane {
+      display: none;
+    }
+    .tab-pane.active {
+      display: block;
+    }
     /* Responsive Adjustments */
     @media (max-width: 767.98px) {
+      .navbar {
+        display: block; /* Show navbar on mobile */
+      }
       .nav-tabs {
         display: none; /* Hide tabs on mobile */
       }
@@ -202,9 +209,6 @@
       }
       .container {
         padding: 10px;
-      }
-      h1 {
-        font-size: 1.2rem;
       }
       h2 {
         font-size: 1.1rem;
@@ -240,6 +244,9 @@
       }
     }
     @media (min-width: 768px) {
+      .navbar {
+        display: none; /* Hide navbar on desktop */
+      }
       .nav-tabs {
         display: flex; /* Show tabs on larger screens */
       }
@@ -445,6 +452,24 @@
   <script>
     const API_URL = "https://empty-block-6580.chaithanyagvn172.workers.dev/";
     let inventoryData = [];
+
+    // Initialize Bootstrap tabs
+    document.addEventListener('DOMContentLoaded', function () {
+      const triggerTabList = document.querySelectorAll('#inventoryTabs .nav-link, #navbarNav .nav-link');
+      triggerTabList.forEach(triggerEl => {
+        const tabTrigger = new bootstrap.Tab(triggerEl);
+        triggerEl.addEventListener('click', function (event) {
+          event.preventDefault();
+          tabTrigger.show();
+          // Collapse the navbar on mobile after selecting a tab
+          const navbarCollapse = document.querySelector('#navbarNav');
+          if (navbarCollapse.classList.contains('show')) {
+            const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: false });
+            bsCollapse.hide();
+          }
+        });
+      });
+    });
 
     async function fetchData(method) {
       try {
