@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Restaurant Inventory Management</title>
-  <!-- Bootstrap CSS -->
+  <!-- Bootstrap CSS (for modals, tables, buttons) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Google Fonts: Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -14,21 +14,34 @@
       background-color: #F5F5F5; /* Light cream background */
       font-family: 'Poppins', sans-serif;
       color: #333; /* Dark gray text */
+      margin: 0;
+      padding: 0;
     }
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 15px;
+      padding: 10px;
     }
     h2, h3 {
       color: #4ECDC4; /* Soft teal for headings */
       font-weight: 500;
     }
+    h2 {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+    h3 {
+      font-size: 1rem;
+      margin-top: 20px;
+    }
     /* Navigation Styles */
     .navbar {
       background-color: #FFF;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
+      margin-bottom: 15px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
     .navbar-brand {
       color: #4ECDC4 !important;
@@ -43,9 +56,10 @@
     }
     .nav-dropdown .nav-link {
       color: #333;
-      padding: 10px 15px;
-      font-size: 1rem;
+      padding: 8px 15px;
+      font-size: 0.95rem;
       transition: all 0.3s ease;
+      display: block;
     }
     .nav-dropdown .nav-link:hover {
       background-color: #4ECDC4;
@@ -57,43 +71,13 @@
       color: #FFF;
       border-radius: 8px;
     }
-    /* Modern Tabs (for larger screens) */
-    .nav-tabs {
-      border: none;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 30px;
-    }
-    .nav-tabs .nav-link {
-      background-color: #E0E0E0; /* Light gray background for inactive tabs */
-      color: #333;
-      border: none;
-      border-radius: 25px;
-      padding: 12px 25px;
-      font-size: 16px;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    .nav-tabs .nav-link:hover {
-      background-color: #4ECDC4; /* Soft teal on hover */
-      color: #FFF;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    }
-    .nav-tabs .nav-link.active {
-      background-color: #4ECDC4; /* Soft teal for active tab */
-      color: #FFF;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    }
     /* Tables */
     .table {
       background-color: #FFF;
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      font-size: 0.9rem;
     }
     .table thead {
       background-color: #4ECDC4; /* Soft teal for table headers */
@@ -102,13 +86,18 @@
     .table-striped tbody tr:nth-of-type(odd) {
       background-color: #F9F9F9; /* Slightly lighter rows */
     }
+    .table th, .table td {
+      padding: 8px;
+      text-align: left;
+    }
     /* Buttons */
     .btn-primary {
       background-color: #4ECDC4; /* Soft teal buttons */
       border: none;
       border-radius: 8px;
-      padding: 8px 16px;
+      padding: 6px 12px;
       font-weight: 500;
+      font-size: 0.9rem;
       transition: all 0.3s ease;
     }
     .btn-primary:hover {
@@ -118,9 +107,9 @@
     }
     /* Item Cards */
     .item-card {
-      width: 100px;
-      height: 100px;
-      margin: 8px;
+      width: 90px;
+      height: 90px;
+      margin: 5px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -137,12 +126,12 @@
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     }
     .item-card img {
-      width: 50px;
-      height: 50px;
-      margin-bottom: 8px;
+      width: 40px;
+      height: 40px;
+      margin-bottom: 5px;
     }
     .item-card span {
-      font-size: 12px;
+      font-size: 11px;
       text-align: center;
       font-weight: 500;
     }
@@ -150,7 +139,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      margin-top: 15px;
+      margin-top: 10px;
     }
     /* Category-specific colors for item cards */
     .item-card.Dairy {
@@ -169,10 +158,16 @@
     .alert-success {
       background-color: #E8F5E9;
       color: #2E7D32;
+      font-size: 0.9rem;
+      padding: 8px;
+      border-radius: 8px;
     }
     .alert-danger {
       background-color: #FFEBEE;
       color: #D32F2F;
+      font-size: 0.9rem;
+      padding: 8px;
+      border-radius: 8px;
     }
     /* Reorder Table Highlight */
     #reorderTableBody tr {
@@ -189,6 +184,12 @@
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
     }
+    .modal-title {
+      font-size: 1rem;
+    }
+    .modal-body {
+      font-size: 0.9rem;
+    }
     /* Tab Panes */
     .tab-pane {
       display: none;
@@ -196,69 +197,60 @@
     .tab-pane.active {
       display: block;
     }
+    /* Form Elements */
+    .form-label {
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+    }
+    .form-select, .form-control {
+      font-size: 0.9rem;
+      padding: 6px;
+      border-radius: 8px;
+    }
     /* Responsive Adjustments */
-    @media (max-width: 767.98px) {
-      .navbar {
-        display: block; /* Show navbar on mobile */
-      }
-      .nav-tabs {
-        display: none; /* Hide tabs on mobile */
-      }
-      .nav-dropdown {
-        display: block; /* Show dropdown on mobile */
-      }
+    @media (min-width: 768px) {
       .container {
-        padding: 10px;
+        padding: 15px;
       }
       h2 {
-        font-size: 1.1rem;
+        font-size: 1.5rem;
       }
       h3 {
-        font-size: 1rem;
+        font-size: 1.2rem;
       }
       .table {
-        font-size: 0.85rem;
+        font-size: 1rem;
       }
-      .table thead th {
-        padding: 8px;
-      }
-      .table tbody td {
-        padding: 8px;
+      .table th, .table td {
+        padding: 12px;
       }
       .item-card {
-        width: 90px;
-        height: 90px;
-        margin: 5px;
+        width: 100px;
+        height: 100px;
+        margin: 8px;
       }
       .item-card img {
-        width: 40px;
-        height: 40px;
-        margin-bottom: 5px;
+        width: 50px;
+        height: 50px;
+        margin-bottom: 8px;
       }
       .item-card span {
-        font-size: 11px;
+        font-size: 12px;
       }
       .btn-primary {
-        padding: 6px 12px;
-        font-size: 0.9rem;
+        padding: 8px 16px;
+        font-size: 1rem;
       }
-    }
-    @media (min-width: 768px) {
-      .navbar {
-        display: none; /* Hide navbar on desktop */
-      }
-      .nav-tabs {
-        display: flex; /* Show tabs on larger screens */
-      }
-      .nav-dropdown {
-        display: none; /* Hide dropdown on larger screens */
+      .nav-link {
+        font-size: 1rem;
+        padding: 10px 20px;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- Mobile Navbar with Dropdown -->
+    <!-- Navbar with Dropdown (used for all screen sizes) -->
     <nav class="navbar navbar-expand-md">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Inventory App</a>
@@ -290,32 +282,10 @@
       </div>
     </nav>
 
-    <!-- Tabs for Larger Screens -->
-    <ul class="nav nav-tabs" id="inventoryTabs">
-      <li class="nav-item">
-        <a class="nav-link active" id="currentStockTab" href="#currentStock">Current Stock</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="logUsageTab" href="#logUsage">Log Usage</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="addInventoryTab" href="#addInventory">Add Inventory</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="pastReceivedTab" href="#pastReceived">Past Received</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="reportsTab" href="#reports">Reports</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="reorderTab" href="#reorder">Reorder</a>
-      </li>
-    </ul>
-
     <!-- Tab Content -->
-    <div class="tab-content mt-3">
+    <div class="tab-content">
       <!-- Current Stock Tab -->
-      <div class="tab-pane fade show active" id="currentStock">
+      <div class="tab-pane active" id="currentStock">
         <h2>Current Stock</h2>
         <table class="table table-striped">
           <thead>
@@ -333,7 +303,7 @@
       </div>
 
       <!-- Log Usage Tab -->
-      <div class="tab-pane fade" id="logUsage">
+      <div class="tab-pane" id="logUsage">
         <h2>Log Usage</h2>
         <!-- Category Dropdown -->
         <div class="mb-3">
@@ -347,7 +317,7 @@
         <div id="itemsGrid"></div>
 
         <!-- Past Usage Table -->
-        <h3 class="mt-4">Past Usage</h3>
+        <h3>Past Usage</h3>
         <table class="table table-striped">
           <thead>
             <tr>
@@ -366,7 +336,7 @@
       </div>
 
       <!-- Add Inventory Tab -->
-      <div class="tab-pane fade" id="addInventory">
+      <div class="tab-pane" id="addInventory">
         <h2>Add Inventory</h2>
         <form id="addInventoryForm">
           <div class="mb-3">
@@ -383,7 +353,7 @@
       </div>
 
       <!-- Past Received Tab -->
-      <div class="tab-pane fade" id="pastReceived">
+      <div class="tab-pane" id="pastReceived">
         <h2>Past Received</h2>
         <table class="table table-striped">
           <thead>
@@ -400,13 +370,13 @@
       </div>
 
       <!-- Reports Tab -->
-      <div class="tab-pane fade" id="reports">
+      <div class="tab-pane" id="reports">
         <h2>Reports</h2>
         <div id="reportsContent"></div>
       </div>
 
       <!-- Reorder Tab -->
-      <div class="tab-pane fade" id="reorder">
+      <div class="tab-pane" id="reorder">
         <h2>Items to Reorder</h2>
         <table class="table table-striped">
           <thead>
@@ -446,98 +416,104 @@
     </div>
   </div>
 
-  <!-- Bootstrap JS and Popper.js -->
+  <!-- Bootstrap JS and Popper.js (for modals) -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
   <script>
     const API_URL = "https://empty-block-6580.chaithanyagvn172.workers.dev/";
     let inventoryData = [];
 
-    // Manual tab switching
-    document.addEventListener('DOMContentLoaded', function () {
-      const triggerTabList = document.querySelectorAll('#inventoryTabs .nav-link, #navbarNav .nav-link');
-      triggerTabList.forEach(triggerEl => {
-        const events = ['click', 'touchstart'];
-        events.forEach(eventType => {
-          triggerEl.addEventListener(eventType, function (event) {
-            event.preventDefault();
-            const targetId = triggerEl.getAttribute('href').substring(1); // e.g., "logUsage"
-            console.log('Switching to tab:', targetId);
-
-            // Remove .active from all nav links and tab panes
-            document.querySelectorAll('#inventoryTabs .nav-link, #navbarNav .nav-link').forEach(link => {
-              link.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-pane').forEach(pane => {
-              pane.classList.remove('active', 'show');
-            });
-
-            // Add .active to the clicked nav link and target tab pane
-            triggerEl.classList.add('active');
-            const targetPane = document.getElementById(targetId);
-            if (targetPane) {
-              targetPane.classList.add('active', 'show');
-            }
-
-            // Collapse the navbar on mobile after selecting a tab
-            const navbarCollapse = document.querySelector('#navbarNav');
-            if (navbarCollapse && navbarCollapse.classList.contains('show')) {
-              const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: false });
-              bsCollapse.hide();
-            }
-          });
-        });
+    // Tab switching logic
+    function initializeTabs() {
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', handleTabSwitch);
+        link.addEventListener('touchstart', handleTabSwitch); // Support touch events
       });
-    });
+    }
 
+    function handleTabSwitch(event) {
+      event.preventDefault();
+      const targetId = event.currentTarget.getAttribute('href').substring(1); // e.g., "logUsage"
+      console.log('Switching to tab:', targetId);
+
+      // Update active nav link
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+      });
+      event.currentTarget.classList.add('active');
+
+      // Update active tab pane
+      document.querySelectorAll('.tab-pane').forEach(pane => {
+        pane.classList.remove('active');
+      });
+      const targetPane = document.getElementById(targetId);
+      if (targetPane) {
+        targetPane.classList.add('active');
+      }
+
+      // Collapse the navbar after selecting a tab
+      const navbarCollapse = document.querySelector('#navbarNav');
+      if (navbarCollapse.classList.contains('show')) {
+        const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: false });
+        bsCollapse.hide();
+      }
+    }
+
+    // Fetch data from API
     async function fetchData(method) {
       try {
         console.log(`Fetching data for method: ${method}`);
         const response = await fetch(`${API_URL}?method=${method}`);
         if (!response.ok) {
-          const text = await response.text();
-          console.error(`Non-OK response for ${method}: ${response.status} ${response.statusText}`, text);
           throw new Error(`Network error: ${response.status} ${response.statusText}`);
         }
         const contentType = response.headers.get('Content-Type');
         if (!contentType || !contentType.includes('application/json')) {
-          const text = await response.text();
-          console.error(`Invalid Content-Type for ${method}: ${contentType}`, text);
           throw new Error(`Invalid response format: Expected JSON, got ${contentType}`);
         }
         const data = await response.json();
-        console.log(`Data received for ${method}:`, data);
         if (data && data.error) {
           console.warn(`Error in ${method}: ${data.error}`);
           return [];
         }
         return data;
       } catch (error) {
-        console.error(`Error fetching ${method}:`, error);
+        console.error(`Error fetching ${method}:`, error.message);
         return [];
       }
     }
 
+    // Fetch all data and populate UI
     async function fetchAllData() {
-      const inventory = await fetchData("getInventory") || [];
-      const usageLog = await fetchData("getUsageLog") || [];
-      const receivedLog = await fetchData("getReceivedLog") || [];
+      try {
+        const inventory = await fetchData("getInventory") || [];
+        const usageLog = await fetchData("getUsageLog") || [];
+        const receivedLog = await fetchData("getReceivedLog") || [];
 
-      console.log("Inventory data in fetchAllData:", inventory);
-      console.log("UsageLog data in fetchAllData:", usageLog);
-      console.log("ReceivedLog data in fetchAllData:", receivedLog);
+        console.log("Inventory data:", inventory);
+        console.log("UsageLog data:", usageLog);
+        console.log("ReceivedLog data:", receivedLog);
 
-      inventoryData = inventory; // Store inventory data globally
-      updateInventoryTable(inventory);
-      updateUsageLogTable(usageLog);
-      updateReceivedLogTable(receivedLog);
-      updateReports(inventory, usageLog);
-      updateReorderTable(inventory);
-      populateCategoryDropdown(inventory);
+        inventoryData = inventory; // Store inventory data globally
+        updateInventoryTable(inventory);
+        updateUsageLogTable(usageLog);
+        updateReceivedLogTable(receivedLog);
+        updateReports(inventory, usageLog);
+        updateReorderTable(inventory);
+        populateCategoryDropdown(inventory);
+      } catch (error) {
+        console.error("Error in fetchAllData:", error.message);
+        alert("Failed to load data. Please try again later.");
+      }
     }
 
     function updateInventoryTable(inventory) {
       const tableBody = document.getElementById("inventoryTableBody");
+      if (!tableBody) {
+        console.error("Inventory table body not found");
+        return;
+      }
       tableBody.innerHTML = "";
       inventory.forEach(item => {
         const row = document.createElement("tr");
@@ -554,8 +530,11 @@
     }
 
     function updateUsageLogTable(usageLog) {
-      console.log("Updating usage log table with data:", usageLog);
       const tableBody = document.getElementById("usageLogTableBody");
+      if (!tableBody) {
+        console.error("Usage log table body not found");
+        return;
+      }
       tableBody.innerHTML = "";
       usageLog.forEach(log => {
         const row = document.createElement("tr");
@@ -575,6 +554,10 @@
 
     function updateReceivedLogTable(receivedLog) {
       const tableBody = document.getElementById("receivedLogTableBody");
+      if (!tableBody) {
+        console.error("Received log table body not found");
+        return;
+      }
       tableBody.innerHTML = "";
       receivedLog.forEach(log => {
         const row = document.createElement("tr");
@@ -591,6 +574,10 @@
 
     function updateReports(inventory, usageLog) {
       const reportsContent = document.getElementById("reportsContent");
+      if (!reportsContent) {
+        console.error("Reports content not found");
+        return;
+      }
       let totalStockValue = inventory.reduce((sum, item) => sum + (item.stock * item.price), 0);
       let totalConsumptionValue = usageLog.reduce((sum, log) => sum + log.consumptionValue, 0);
 
@@ -602,6 +589,10 @@
 
     function updateReorderTable(inventory) {
       const tableBody = document.getElementById("reorderTableBody");
+      if (!tableBody) {
+        console.error("Reorder table body not found");
+        return;
+      }
       tableBody.innerHTML = "";
       inventory.forEach(item => {
         if (item.stock <= item.threshold) {
@@ -621,6 +612,10 @@
     function populateCategoryDropdown(inventory) {
       const categorySelect = document.getElementById("categorySelect");
       const addItemSelect = document.getElementById("addItem");
+      if (!categorySelect || !addItemSelect) {
+        console.error("Category or add item select not found");
+        return;
+      }
 
       // Get unique categories
       const categories = [...new Set(inventory.map(item => item.category))].filter(cat => cat);
@@ -648,8 +643,12 @@
     function updateItemsGrid() {
       const categorySelect = document.getElementById("categorySelect");
       const itemsGrid = document.getElementById("itemsGrid");
-      const selectedCategory = categorySelect.value;
+      if (!categorySelect || !itemsGrid) {
+        console.error("Category select or items grid not found");
+        return;
+      }
 
+      const selectedCategory = categorySelect.value;
       itemsGrid.innerHTML = "";
       if (!selectedCategory) return;
 
@@ -703,6 +702,7 @@
       }
     }
 
+    // Log Usage Form Submission
     document.getElementById("modalLogUsageForm").onsubmit = async function (event) {
       event.preventDefault();
       const itemName = document.getElementById("modalItemName").textContent;
@@ -726,7 +726,8 @@
       }
     };
 
-    document.getElement="addInventoryForm").onsubmit = async function (event) {
+    // Add Inventory Form Submission
+    document.getElementById("addInventoryForm").onsubmit = async function (event) {
       event.preventDefault();
       const itemName = document.getElementById("addItem").value;
       const quantity = parseInt(document.getElementById("addQuantity").value);
@@ -762,8 +763,11 @@
       }
     };
 
-    // Fetch data on page load
-    fetchAllData();
+    // Initialize the app
+    document.addEventListener('DOMContentLoaded', () => {
+      initializeTabs();
+      fetchAllData();
+    });
   </script>
 </body>
 </html>
