@@ -268,22 +268,22 @@
         <div class="collapse navbar-collapse nav-dropdown" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" href="#currentStock" data-bs-toggle="tab" id="currentStockTab">Current Stock</a>
+              <a class="nav-link active" href="#currentStock" id="currentStockTab">Current Stock</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#logUsage" data-bs-toggle="tab" id="logUsageTab">Log Usage</a>
+              <a class="nav-link" href="#logUsage" id="logUsageTab">Log Usage</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#addInventory" data-bs-toggle="tab" id="addInventoryTab">Add Inventory</a>
+              <a class="nav-link" href="#addInventory" id="addInventoryTab">Add Inventory</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#pastReceived" data-bs-toggle="tab" id="pastReceivedTab">Past Received</a>
+              <a class="nav-link" href="#pastReceived" id="pastReceivedTab">Past Received</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#reports" data-bs-toggle="tab" id="reportsTab">Reports</a>
+              <a class="nav-link" href="#reports" id="reportsTab">Reports</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#reorder" data-bs-toggle="tab" id="reorderTab">Reorder</a>
+              <a class="nav-link" href="#reorder" id="reorderTab">Reorder</a>
             </li>
           </ul>
         </div>
@@ -293,22 +293,22 @@
     <!-- Tabs for Larger Screens -->
     <ul class="nav nav-tabs" id="inventoryTabs">
       <li class="nav-item">
-        <a class="nav-link active" id="currentStockTab" data-bs-toggle="tab" href="#currentStock">Current Stock</a>
+        <a class="nav-link active" id="currentStockTab" href="#currentStock">Current Stock</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="logUsageTab" data-bs-toggle="tab" href="#logUsage">Log Usage</a>
+        <a class="nav-link" id="logUsageTab" href="#logUsage">Log Usage</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="addInventoryTab" data-bs-toggle="tab" href="#addInventory">Add Inventory</a>
+        <a class="nav-link" id="addInventoryTab" href="#addInventory">Add Inventory</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="pastReceivedTab" data-bs-toggle="tab" href="#pastReceived">Past Received</a>
+        <a class="nav-link" id="pastReceivedTab" href="#pastReceived">Past Received</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="reportsTab" data-bs-toggle="tab" href="#reports">Reports</a>
+        <a class="nav-link" id="reportsTab" href="#reports">Reports</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="reorderTab" data-bs-toggle="tab" href="#reorder">Reorder</a>
+        <a class="nav-link" id="reorderTab" href="#reorder">Reorder</a>
       </li>
     </ul>
 
@@ -453,20 +453,39 @@
     const API_URL = "https://empty-block-6580.chaithanyagvn172.workers.dev/";
     let inventoryData = [];
 
-    // Initialize Bootstrap tabs
+    // Manual tab switching
     document.addEventListener('DOMContentLoaded', function () {
       const triggerTabList = document.querySelectorAll('#inventoryTabs .nav-link, #navbarNav .nav-link');
       triggerTabList.forEach(triggerEl => {
-        const tabTrigger = new bootstrap.Tab(triggerEl);
-        triggerEl.addEventListener('click', function (event) {
-          event.preventDefault();
-          tabTrigger.show();
-          // Collapse the navbar on mobile after selecting a tab
-          const navbarCollapse = document.querySelector('#navbarNav');
-          if (navbarCollapse.classList.contains('show')) {
-            const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: false });
-            bsCollapse.hide();
-          }
+        const events = ['click', 'touchstart'];
+        events.forEach(eventType => {
+          triggerEl.addEventListener(eventType, function (event) {
+            event.preventDefault();
+            const targetId = triggerEl.getAttribute('href').substring(1); // e.g., "logUsage"
+            console.log('Switching to tab:', targetId);
+
+            // Remove .active from all nav links and tab panes
+            document.querySelectorAll('#inventoryTabs .nav-link, #navbarNav .nav-link').forEach(link => {
+              link.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-pane').forEach(pane => {
+              pane.classList.remove('active', 'show');
+            });
+
+            // Add .active to the clicked nav link and target tab pane
+            triggerEl.classList.add('active');
+            const targetPane = document.getElementById(targetId);
+            if (targetPane) {
+              targetPane.classList.add('active', 'show');
+            }
+
+            // Collapse the navbar on mobile after selecting a tab
+            const navbarCollapse = document.querySelector('#navbarNav');
+            if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+              const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: false });
+              bsCollapse.hide();
+            }
+          });
         });
       });
     });
@@ -707,7 +726,7 @@
       }
     };
 
-    document.getElementById("addInventoryForm").onsubmit = async function (event) {
+    document.getElement="addInventoryForm").onsubmit = async function (event) {
       event.preventDefault();
       const itemName = document.getElementById("addItem").value;
       const quantity = parseInt(document.getElementById("addQuantity").value);
