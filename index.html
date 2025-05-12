@@ -105,7 +105,7 @@
       transform: translateY(-2px);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     }
-    /* Item Cards */
+    /* Item Cards (Text-Only) */
     .item-card {
       width: 90px;
       height: 90px;
@@ -120,20 +120,18 @@
       transition: all 0.3s ease;
       background-color: #FFF;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 5px;
     }
     .item-card:hover {
       transform: scale(1.05);
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     }
-    .item-card img {
-      width: 40px;
-      height: 40px;
-      margin-bottom: 5px;
-    }
     .item-card span {
-      font-size: 11px;
+      font-size: 12px;
+      font-weight: 600;
       text-align: center;
-      font-weight: 500;
+      color: #333;
+      line-height: 1.2;
     }
     #itemsGrid {
       display: flex;
@@ -229,13 +227,8 @@
         height: 100px;
         margin: 8px;
       }
-      .item-card img {
-        width: 50px;
-        height: 50px;
-        margin-bottom: 8px;
-      }
       .item-card span {
-        font-size: 12px;
+        font-size: 14px;
       }
       .btn-primary {
         padding: 8px 16px;
@@ -660,7 +653,6 @@
         card.className = `item-card ${item.category}`; // Add category class for styling
         card.onclick = () => openLogUsageModal(item.name);
         card.innerHTML = `
-          <img src="https://via.placeholder.com/60?text=${item.name.charAt(0)}" alt="${item.name}">
           <span>${item.name}</span>
         `;
         itemsGrid.appendChild(card);
