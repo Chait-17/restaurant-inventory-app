@@ -319,25 +319,37 @@
 
     // Populate item dropdowns for Log Usage and Add Inventory
     function populateItemDropdowns(inventory) {
-      const usageItemSelect = document.getElementById("usageItem");
-      const addItemSelect = document.getElementById("addItem");
+  console.log("Populating dropdowns with inventory:", inventory); // Debug log
 
-      usageItemSelect.innerHTML = '<option value="">Select an item</option>';
-      addItemSelect.innerHTML = '<option value="">Select an item</option>';
+  const usageItemSelect = document.getElementById("usageItem");
+  const addItemSelect = document.getElementById("addItem");
 
-      inventory.forEach(item => {
-        const option1 = document.createElement("option");
-        option1.value = item.name;
-        option1.textContent = item.name;
-        usageItemSelect.appendChild(option1);
+  console.log("usageItemSelect element:", usageItemSelect); // Debug log
+  console.log("addItemSelect element:", addItemSelect); // Debug log
 
-        const option2 = document.createElement("option");
-        option2.value = item.name;
-        option2.textContent = item.name;
-        addItemSelect.appendChild(option2);
-      });
-    }
+  if (!usageItemSelect || !addItemSelect) {
+    console.error("Dropdown elements not found!");
+    return;
+  }
 
+  usageItemSelect.innerHTML = '<option value="">Select an item</option>';
+  addItemSelect.innerHTML = '<option value="">Select an item</option>';
+
+  inventory.forEach(item => {
+    console.log("Adding item to dropdown:", item.name); // Debug log
+    const option1 = document.createElement("option");
+    option1.value = item.name;
+    option1.textContent = item.name;
+    usageItemSelect.appendChild(option1);
+
+    const option2 = document.createElement("option");
+    option2.value = item.name;
+    option2.textContent = item.name;
+    addItemSelect.appendChild(option2);
+  });
+
+  console.log("Final usageItemSelect HTML:", usageItemSelect.innerHTML); // Debug log
+}
     // Log Usage function
     async function logUsage(event) {
       event.preventDefault();
